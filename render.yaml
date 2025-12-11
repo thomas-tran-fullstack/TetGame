@@ -3,24 +3,15 @@ services:
     name: tetgame-backend
     env: docker
     repo: .
-    dockerfilePath: backend/Dockerfile
+    dockerfilePath: Dockerfile.backend
     branch: main
-    buildCommand: ./mvnw -DskipTests package
-    startCommand: java -jar target/backend-0.0.1-SNAPSHOT.jar
-    envVars:
-      - key: SPRING_DATASOURCE_URL
-        fromService: tetgame-db
-      - key: REDIS_URL
-        fromService: tetgame-redis
 
   - type: web_service
     name: tetgame-frontend
     env: docker
     repo: .
-    dockerfilePath: frontend/Dockerfile
+    dockerfilePath: Dockerfile.frontend
     branch: main
-    buildCommand: npm install --prefix frontend && npm run build --prefix frontend
-    startCommand: npm run preview --prefix frontend
 
 databases:
   - name: tetgame-db
@@ -31,5 +22,3 @@ addons:
   - type: redis
     name: tetgame-redis
     plan: starter
-
-*** End Patch
