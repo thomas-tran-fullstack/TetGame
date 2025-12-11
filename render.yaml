@@ -2,16 +2,10 @@ services:
   - type: web_service
     name: tetgame-backend
     env: docker
-    repo: .
-    dockerfilePath: Dockerfile.backend
+    repo: https://github.com/thomas-tran-fullstack/TetGame
     branch: main
-
-  - type: web_service
-    name: tetgame-frontend
-    env: docker
-    repo: .
-    dockerfilePath: Dockerfile.frontend
-    branch: main
+    dockerfile: ./Dockerfile
+    healthCheckPath: /actuator/health
 
 databases:
   - name: tetgame-db
