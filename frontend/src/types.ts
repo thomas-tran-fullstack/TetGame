@@ -158,6 +158,20 @@ export interface LoginResponse {
   user: User;
 }
 
+export interface AuthResponse {
+  accessToken: string;
+  refreshToken?: string;
+  user: User;
+}
+
+export interface PageResponse<T> {
+  content: T[];
+  totalElements: number;
+  totalPages: number;
+  page: number;
+  size: number;
+}
+
 export interface AuthState {
   user: User | null;
   token: string | null;

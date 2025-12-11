@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import apiService from '../services/api';
 import websocketService from '../services/websocket';
 import { useAuthStore } from '../store';
-import './Auth.css';
+import '../components/Auth.css';
 
 export default function Register() {
   const navigate = useNavigate();

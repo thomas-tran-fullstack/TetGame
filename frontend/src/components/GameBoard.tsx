@@ -45,9 +45,10 @@ export default function GameBoard() {
 
     websocketService.subscribeToGameState(roomId, (state) => {
       setGameState(state);
-      // Check if it's current player's turn
+      // Determine current player from turnOrder + currentTurnIndex
       const currentUserId = localStorage.getItem('userId');
-      setIsMyTurn(state.currentPlayer === currentUserId);
+      const currentPlayerId = state.turnOrder ? state.turnOrder[state.currentTurnIndex] : undefined;
+      setIsMyTurn(currentPlayerId === currentUserId);
     });
 
     websocketService.subscribeToGameStarted(roomId, (data) => {
@@ -131,11 +132,12 @@ export default function GameBoard() {
 
             {/* Other Players */}
             <div className="other-players">
-              {gameState.currentPlayer && (
-                <div className="current-player-indicator">
-                  🎯 Lượt của: {gameState.currentPlayer}
-                </div>
-              )}
+              {(() => {
+                const cp = gameState.turnOrder ? gameState.turnOrder[gameState.currentTurnIndex] : undefined;
+                return cp ? (
+                  <div className="current-player-indicator">🎯 Lượt của: {cp}</div>
+                ) : null;
+              })()}
               {Object.entries(gameState.hands).map(([playerId, hand]) => (
                 <div key={playerId} className="player-status">
                   {playerId}: {hand.length} lá

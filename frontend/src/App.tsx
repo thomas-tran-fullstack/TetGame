@@ -32,15 +32,31 @@ function App() {
       const skipAuth = params.get('skipAuth') === 'true';
 
       if (skipAuth) {
-        // Inject dev user
+        // Inject dev user (match `User` type)
         const devUser = {
           id: '11111111-1111-1111-1111-111111111111',
           username: 'testuser',
+          email: 'testuser@example.com',
           fullName: 'Test User',
-          avatarUrl: null,
+          avatar: null,
+          wallet: {
+            id: '22222222-2222-2222-2222-222222222222',
+            userId: '11111111-1111-1111-1111-111111111111',
+            balance: 100000,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          },
+          rank: {
+            id: 'r1',
+            userId: '11111111-1111-1111-1111-111111111111',
+            points: 0,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          },
         };
         localStorage.setItem('accessToken', 'dev-token');
-        setUser(devUser);
+        localStorage.setItem('userId', devUser.id);
+        setUser(devUser as any);
         // Redirect to remove query param
         window.history.replaceState({}, '', '/lobby');
       } else if (token && !user) {

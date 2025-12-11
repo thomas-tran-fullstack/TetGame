@@ -11,7 +11,7 @@ interface Props {
   anim?: boolean;
 }
 
-export default function CardView({ card, faceUp = true, selected = false, onClick }: Props) {
+export default function CardView({ card, faceUp = true, selected = false, onClick, className, anim = false }: Props) {
   const mapRankToNumber = (rank: CardRank) => {
     switch(rank){
       case CardRank.THREE: return '3';

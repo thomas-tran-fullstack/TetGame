@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apiService from '../services/api';
 import { useRoomStore } from '../store';
-import type { RoomResponse, BetLevel } from '../types';
+import type { RoomResponse } from '../types';
+import { BetLevel } from '../types';
 import './RoomList.css';
 
 export default function RoomList() {
@@ -10,7 +11,7 @@ export default function RoomList() {
   const { rooms, setRooms } = useRoomStore();
   const [isCreating, setIsCreating] = useState(false);
   const [roomName, setRoomName] = useState('');
-  const [betLevel, setBetLevel] = useState<BetLevel>('BAN1');
+  const [betLevel, setBetLevel] = useState<BetLevel>(BetLevel.BAN1);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -40,7 +41,7 @@ export default function RoomList() {
       setRooms([...rooms, newRoom]);
       setIsCreating(false);
       setRoomName('');
-      setBetLevel('BAN1');
+      setBetLevel(BetLevel.BAN1);
     } catch (error) {
       console.error('Failed to create room:', error);
       alert('Tạo phòng thất bại');

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import type { AxiosInstance } from 'axios';
-import type { AuthResponse, User, RoomResponse, PageResponse } from '../types';
+import type { User, RoomResponse } from '../types';
+import type { AuthResponse, PageResponse } from '../types';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
 
@@ -49,8 +50,8 @@ class ApiService {
   }
 
   // Auth endpoints
-  async login(email: string, password: string): Promise<AuthResponse> {
-    const response = await this.client.post('/auth/login', { email, password });
+  async login(username: string, password: string): Promise<AuthResponse> {
+    const response = await this.client.post('/auth/login', { username, password });
     return response.data;
   }
 
