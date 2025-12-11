@@ -17,9 +17,9 @@ spring:
     store-type: redis
 
   datasource:
-    url: jdbc:postgresql://dpg-d4ruvmemcj7s73fcq4h0-a.singapore-postgres.render.com:5432/multigame
-    username: sa
-    password: 23T3a0G0eN2XWFB5JXDwUthZROFcbbqn
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://dpg-d4ruvmemcj7s73fcq4h0-a.singapore-postgres.render.com:5432/multigame}
+    username: ${SPRING_DATASOURCE_USERNAME:sa}
+    password: ${SPRING_DATASOURCE_PASSWORD:23T3a0G0eN2XWFB5JXDwUthZROFcbbqn}
     hikari:
       maximum-pool-size: 10
       minimum-idle: 2
@@ -29,8 +29,8 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update   # dev: update | production: validate
-    show-sql: true
+      ddl-auto: validate
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
@@ -38,41 +38,19 @@ spring:
 
   data:
     redis:
-      host: redis-15587.c89.us-east-1-3.ec2.cloud.redislabs.com
-      port: 15587
-      username: default
-      password: TrLQ7eBdK23aX01uB9SHvZxvNNVl3wM3
+      host: ${REDIS_HOST:redis-15587.c89.us-east-1-3.ec2.cloud.redislabs.com}
+      port: ${REDIS_PORT:15587}
+      username: ${REDIS_USERNAME:default}
+      password: ${REDIS_PASSWORD:TrLQ7eBdK23aX01uB9SHvZxvNNVl3wM3}
       ssl:
         enabled: false
-
-      timeout: 60000  # 60s
+      timeout: 60000
 
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 15MB
 
-jwt:
-  secret: 66d6ec3d4ea6c1f2bdc572ce4045e92caa046e169cdadc189357c001a6df4a78
-  expiration: 86400000           # 24h
-  refresh-expiration: 604800000   # 7 days
-
-logging:
-  level:
-    root: INFO
-    org.springframework.web: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-
-cors:
-  allowed-origins:
-    - http://localhost:5173
-    - https://<frontend-render>.onrender.com
-  allowed-methods: "*"
-  allowed-headers: "*"
-  allow-credentials: true
-
-spring:
   security:
     oauth2:
       client:
@@ -102,3 +80,22 @@ spring:
             token-uri: https://graph.facebook.com/v18.0/oauth/access_token
             user-info-uri: https://graph.facebook.com/me
             user-name-attribute: id
+jwt:
+  secret: ${JWT_SECRET:66d6ec3d4ea6c1f2bdc572ce4045e92caa046e169cdadc189357c001a6df4a78}
+  expiration: 86400000
+  refresh-expiration: 604800000
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.hibernate.SQL: INFO
+
+cors:
+  allowed-origins:
+    - http://localhost:5173
+    - http://localhost:3000
+    - https://tetgame-frontend.onrender.com
+  allowed-methods: "*"
+  allowed-headers: "*"
+  allow-credentials: true
