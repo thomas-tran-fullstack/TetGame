@@ -26,7 +26,24 @@ function App() {
   useEffect(() => {
     const initApp = async () => {
       const token = localStorage.getItem('accessToken');
-      if (token && !user) {
+      
+      // Check if skipAuth in URL params
+      const params = new URLSearchParams(window.location.search);
+      const skipAuth = params.get('skipAuth') === 'true';
+
+      if (skipAuth) {
+        // Inject dev user
+        const devUser = {
+          id: '11111111-1111-1111-1111-111111111111',
+          username: 'testuser',
+          fullName: 'Test User',
+          avatarUrl: null,
+        };
+        localStorage.setItem('accessToken', 'dev-token');
+        setUser(devUser);
+        // Redirect to remove query param
+        window.history.replaceState({}, '', '/lobby');
+      } else if (token && !user) {
         try {
           const currentUser = await apiService.getCurrentUser();
           setUser(currentUser);
