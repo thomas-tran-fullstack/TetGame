@@ -58,14 +58,14 @@ spring:
           google:
             client-id: ${GOOGLE_CLIENT_ID:placeholder-google-client-id}
             client-secret: ${GOOGLE_CLIENT_SECRET:placeholder-google-secret}
-            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+            redirect-uri: ${OAUTH2_BASE_URL:http://localhost:8081}/oauth2/callback/{registrationId}
             scope:
               - profile
               - email
           facebook:
             client-id: ${FACEBOOK_CLIENT_ID:placeholder-facebook-app-id}
             client-secret: ${FACEBOOK_CLIENT_SECRET:placeholder-facebook-secret}
-            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+            redirect-uri: ${OAUTH2_BASE_URL:http://localhost:8081}/oauth2/callback/{registrationId}
             scope:
               - public_profile
               - email
