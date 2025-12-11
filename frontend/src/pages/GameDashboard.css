@@ -1,0 +1,9 @@
+.dashboard-container{padding:2rem;max-width:1000px;margin:0 auto}
+.dashboard-title{font-size:2rem;margin-bottom:1rem}
+.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.dash-card{background:white;padding:1.5rem;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.06);text-align:left}
+.dash-card h3{margin:0 0 0.5rem 0}
+.dash-btn{margin-top:1rem;padding:0.6rem 1rem;border-radius:8px;border:none;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;cursor:pointer}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000}
+.modal-dialog{background:white;padding:1.5rem;border-radius:12px;max-width:480px;width:90%}
+.btn-cancel{padding:0.6rem 1rem;border-radius:8px;border:1px solid #ddd;background:#f0f0f0}

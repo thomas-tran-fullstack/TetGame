@@ -1,0 +1,49 @@
+name: CI Build & Trigger Render Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Build backend
+      working-directory: backend
+      run: |
+        ./mvnw -DskipTests package
+
+    - name: Build frontend
+      working-directory: frontend
+      run: |
+        npm ci
+        npm run build
+
+    - name: Trigger Render backend deploy
+      env:
+        RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        RENDER_BACKEND_SERVICE_ID: ${{ secrets.RENDER_BACKEND_SERVICE_ID }}
+      run: |
+        curl -sSf -X POST "https://api.render.com/v1/services/${RENDER_BACKEND_SERVICE_ID}/deploys" \
+          -H "Authorization: Bearer ${RENDER_API_KEY}" \
+          -H "Content-Type: application/json" \
+          -d '{"clearCache":true}'
+
+    - name: Trigger Render frontend deploy
+      env:
+        RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        RENDER_FRONTEND_SERVICE_ID: ${{ secrets.RENDER_FRONTEND_SERVICE_ID }}
+      run: |
+        curl -sSf -X POST "https://api.render.com/v1/services/${RENDER_FRONTEND_SERVICE_ID}/deploys" \
+          -H "Authorization: Bearer ${RENDER_API_KEY}" \
+          -H "Content-Type: application/json" \
+          -d '{"clearCache":true}'

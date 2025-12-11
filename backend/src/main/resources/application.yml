@@ -1,0 +1,104 @@
+app:
+  name: multigame
+  version: 16
+
+server:
+  port: 8081
+
+spring:
+  application:
+    name: multigame
+
+  docker:
+    compose:
+      enabled: false
+
+  session:
+    store-type: redis
+
+  datasource:
+    url: jdbc:postgresql://dpg-d4ruvmemcj7s73fcq4h0-a.singapore-postgres.render.com:5432/multigame
+    username: sa
+    password: 23T3a0G0eN2XWFB5JXDwUthZROFcbbqn
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      max-lifetime: 600000
+      connection-timeout: 30000
+
+  jpa:
+    hibernate:
+      ddl-auto: update   # dev: update | production: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  data:
+    redis:
+      host: redis-15587.c89.us-east-1-3.ec2.cloud.redislabs.com
+      port: 15587
+      username: default
+      password: TrLQ7eBdK23aX01uB9SHvZxvNNVl3wM3
+      ssl:
+        enabled: false
+
+      timeout: 60000  # 60s
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 15MB
+
+jwt:
+  secret: 66d6ec3d4ea6c1f2bdc572ce4045e92caa046e169cdadc189357c001a6df4a78
+  expiration: 86400000           # 24h
+  refresh-expiration: 604800000   # 7 days
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+cors:
+  allowed-origins:
+    - http://localhost:5173
+    - https://<frontend-render>.onrender.com
+  allowed-methods: "*"
+  allowed-headers: "*"
+  allow-credentials: true
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID:placeholder-google-client-id}
+            client-secret: ${GOOGLE_CLIENT_SECRET:placeholder-google-secret}
+            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - profile
+              - email
+          facebook:
+            client-id: ${FACEBOOK_CLIENT_ID:placeholder-facebook-app-id}
+            client-secret: ${FACEBOOK_CLIENT_SECRET:placeholder-facebook-secret}
+            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - public_profile
+              - email
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://www.googleapis.com/oauth2/v4/token
+            user-info-uri: https://www.googleapis.com/oauth2/v1/userinfo
+            user-name-attribute: sub
+          facebook:
+            authorization-uri: https://www.facebook.com/v18.0/dialog/oauth
+            token-uri: https://graph.facebook.com/v18.0/oauth/access_token
+            user-info-uri: https://graph.facebook.com/me
+            user-name-attribute: id
