@@ -15,7 +15,8 @@ import com.tetgame.modules.room.repository.RoomSeatRepository;
 import com.tetgame.modules.room.service.RoomStateService;
 import com.tetgame.websocket.RedisPublisher;
 import com.tetgame.modules.game.tienlen.GameEngine;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,6 @@ import java.util.Map;
 import java.util.HashMap;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
 public class RoomStateServiceImpl implements RoomStateService {
 
@@ -39,6 +39,23 @@ public class RoomStateServiceImpl implements RoomStateService {
     private final ObjectMapper objectMapper;
     private final GameEngine gameEngine;
     private final com.tetgame.modules.user.service.WalletService walletService;
+
+    @Autowired
+    public RoomStateServiceImpl(RoomRepository roomRepository,
+                                RoomSeatRepository roomSeatRepository,
+                                RedisPublisher redisPublisher,
+                                RedisTemplate<String, Object> redisTemplate,
+                                ObjectMapper objectMapper,
+                                @Lazy GameEngine gameEngine,
+                                com.tetgame.modules.user.service.WalletService walletService) {
+        this.roomRepository = roomRepository;
+        this.roomSeatRepository = roomSeatRepository;
+        this.redisPublisher = redisPublisher;
+        this.redisTemplate = redisTemplate;
+        this.objectMapper = objectMapper;
+        this.gameEngine = gameEngine;
+        this.walletService = walletService;
+    }
 
     @Override
     public Integer allocateSeat(UUID roomId, UUID playerId) {
