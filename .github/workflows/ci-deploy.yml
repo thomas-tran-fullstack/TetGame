@@ -28,22 +28,12 @@ jobs:
         npm ci
         npm run build
 
-    - name: Trigger Render backend deploy
+    - name: Trigger Render deploy for single tetgame service
       env:
         RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
-        RENDER_BACKEND_SERVICE_ID: ${{ secrets.RENDER_BACKEND_SERVICE_ID }}
+        RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
       run: |
-        curl -sSf -X POST "https://api.render.com/v1/services/${RENDER_BACKEND_SERVICE_ID}/deploys" \
-          -H "Authorization: Bearer ${RENDER_API_KEY}" \
-          -H "Content-Type: application/json" \
-          -d '{"clearCache":true}'
-
-    - name: Trigger Render frontend deploy
-      env:
-        RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
-        RENDER_FRONTEND_SERVICE_ID: ${{ secrets.RENDER_FRONTEND_SERVICE_ID }}
-      run: |
-        curl -sSf -X POST "https://api.render.com/v1/services/${RENDER_FRONTEND_SERVICE_ID}/deploys" \
+        curl -sSf -X POST "https://api.render.com/v1/services/${RENDER_SERVICE_ID}/deploys" \
           -H "Authorization: Bearer ${RENDER_API_KEY}" \
           -H "Content-Type: application/json" \
           -d '{"clearCache":true}'
