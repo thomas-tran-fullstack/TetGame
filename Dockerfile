@@ -3,7 +3,7 @@ FROM node:20-alpine AS frontend-builder
 WORKDIR /workspace/frontend
 COPY frontend/package*.json ./
 # Use `npm ci` for reproducible installs; fall back to `npm install` if lockfile is out of sync
-RUN npm ci || npm install --no-audit --prefer-offline --silent
+RUN npm ci 2>/dev/null || npm install --no-audit --prefer-offline
 COPY frontend/ .
 RUN npm run build
 

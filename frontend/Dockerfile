@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package*.json ./
 # Use npm ci when possible for reproducible installs; fall back to npm install
 # if the lockfile and package.json are out of sync (prevents CI Docker failures).
-RUN npm ci || npm install --no-audit --prefer-offline --silent
+RUN npm ci 2>/dev/null || npm install --no-audit --prefer-offline
 
 # Copy source
 COPY . .
