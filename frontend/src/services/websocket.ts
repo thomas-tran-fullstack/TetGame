@@ -5,7 +5,7 @@ import type { Card, Play } from '../types';
 class WebSocketService {
   private stompClient: any = null;
   private subscriptions: Map<string, StompSubscription> = new Map();
-  private url = import.meta.env.VITE_WS_URL || 'http://localhost:8080/ws';
+  private url = import.meta.env.VITE_WS_URL || '/ws';
   private token: string | null = null;
 
   connect(token: string): Promise<void> {

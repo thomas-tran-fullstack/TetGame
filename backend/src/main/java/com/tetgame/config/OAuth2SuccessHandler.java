@@ -53,7 +53,9 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         if (user != null) {
             String token = jwtProvider.generateToken(user.getUsername());
             long balance = walletService.getBalance(user.getId());
-            String redirectUrl = String.format("http://localhost:5173/oauth/callback?token=%s&username=%s&avatar=%s&balance=%d",
+            String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+            String redirectUrl = String.format("%s/oauth/callback?token=%s&username=%s&avatar=%s&balance=%d",
+                    baseUrl,
                     URLEncoder.encode(token, StandardCharsets.UTF_8),
                     URLEncoder.encode(user.getUsername(), StandardCharsets.UTF_8),
                     URLEncoder.encode(user.getAvatarUrl() != null ? user.getAvatarUrl() : "", StandardCharsets.UTF_8),

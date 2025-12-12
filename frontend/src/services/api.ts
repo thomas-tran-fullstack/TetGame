@@ -3,7 +3,7 @@ import type { AxiosInstance } from 'axios';
 import type { User, RoomResponse } from '../types';
 import type { AuthResponse, PageResponse } from '../types';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 class ApiService {
   private client: AxiosInstance;
