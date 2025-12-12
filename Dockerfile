@@ -20,4 +20,5 @@ FROM eclipse-temurin:17-jre
 WORKDIR /app
 COPY --from=build /workspace/target/backend-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+# Start JVM with server.port set from PORT env var (Render provides PORT)
+ENTRYPOINT ["sh","-c","java -Dserver.port=${PORT:-8080} -jar /app/app.jar"]

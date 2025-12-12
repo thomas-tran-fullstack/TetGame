@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ForwardController {
 
     /**
-     * Forward all routes except /api/** and static resources to index.html
+     * Forward all routes except /api/** to index.html
      * This allows React Router to handle client-side routing
      */
-    @GetMapping({"/", "/{x:[\\w\\-]+}", "/{x:^(?!api$).*$}/**"})
+    @GetMapping({"", "/{path:(?!api|actuator|swagger-ui|v3|images|static).*}", "/**/{path:(?!api|actuator|swagger-ui|v3|images|static).*}"})
     public String forward() {
         return "forward:/index.html";
     }
 }
+
