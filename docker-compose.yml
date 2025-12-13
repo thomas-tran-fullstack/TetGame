@@ -33,10 +33,10 @@ services:
       timeout: 5s
       retries: 5
 
-  # Spring Boot Backend
+  # Spring Boot Backend (includes frontend static resources)
   backend:
     build:
-      context: ./backend
+      context: .
       dockerfile: Dockerfile
     container_name: tetgame-backend
     ports:
@@ -59,23 +59,6 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
-
-  # React Frontend
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-      args:
-        VITE_API_URL: http://backend:8080/api
-        VITE_WS_URL: ws://backend:8080/ws
-    container_name: tetgame-frontend
-    ports:
-      - "80:80"
-    depends_on:
-      - backend
-    environment:
-      - VITE_API_URL=http://localhost:8080/api
-      - VITE_WS_URL=ws://localhost:8080/ws
 
 volumes:
   postgres_data:
