@@ -1,0 +1,36 @@
+/* ========== AUTH PAGE STYLES ========== */
+.auth-container {
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(42, 26, 26, 0.9));
+}
+
+.text-link {
+    color: var(--color-accent-gold);
+    font-weight: 600;
+    transition: color var(--transition-speed);
+}
+
+.text-link:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 10px;
+    }
+
+    .form-container {
+        padding: 25px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 20px 12px;
+    }
+}

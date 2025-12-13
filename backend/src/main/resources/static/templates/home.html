@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ - TetGame</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">
+            <span class="logo-tet">Tet</span><span class="logo-game">Game</span>
+        </div>
+        
+        <div class="header-right">
+            <div class="balance-box">
+                <span class="balance-amount">13.000.000 VNĐ</span>
+                <div class="coin-icon"></div>
+            </div>
+
+            <div class="user-info" onclick="goToProfile()">
+                <div class="avatar">A</div>
+                <span class="username">Người Chơi</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="home-container">
+        <div id="alertContainer"></div>
+
+        <div class="game-selector">
+            <!-- Previous Button -->
+            <button class="carousel-btn carousel-prev" onclick="previousGame()">
+                <span>&lt;</span>
+            </button>
+
+            <!-- Game Logo -->
+            <div class="game-logo-wrapper">
+                <img id="gameLogo" src="/images/logo/tienlen.png" alt="Tiến Lên" class="game-logo">
+                <div class="game-name" id="gameName">Tiến Lên</div>
+            </div>
+
+            <!-- Next Button -->
+            <button class="carousel-btn carousel-next" onclick="nextGame()">
+                <span>&gt;</span>
+            </button>
+        </div>
+
+        <!-- Play Button -->
+        <div class="play-button-container">
+            <button class="btn btn-success btn-lg" onclick="playGame()">Chơi</button>
+        </div>
+
+        <!-- Coming Soon Message (for other games) -->
+        <div id="comingSoonContainer" class="alert alert-warning hidden">
+            <span>Trò chơi này sẽ sớm được cập nhật! Vui lòng quay lại sau.</span>
+            <button class="alert-close" onclick="closeComingSoon()">×</button>
+        </div>
+    </main>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký - TetGame</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+    <button class="back-button" onclick="goBack();">←</button>
+
+    <div class="full-screen auth-container">
+        <div class="form-container form-container-large">
+            <h2 class="text-center">Tạo Tài Khoản</h2>
+            
+            <div id="alertContainer"></div>
+
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <!-- Họ và Tên -->
+                <div class="form-group">
+                    <label for="fullName">Họ và Tên</label>
+                    <input 
+                        type="text" 
+                        id="fullName" 
+                        class="form-control" 
+                        placeholder="Nhập họ và tên" 
+                        required
+                    >
+                    <small class="form-text text-muted">Tên sẽ hiển thị trong trò chơi</small>
+                </div>
+
+                <!-- Ngày Sinh -->
+                <div class="form-group">
+                    <label for="dob">Ngày Sinh</label>
+                    <input 
+                        type="date" 
+                        id="dob" 
+                        class="form-control" 
+                        required
+                    >
+                    <small class="form-text text-muted">Phải từ 16 tuổi trở lên</small>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        class="form-control" 
+                        placeholder="your@email.com" 
+                        required
+                    >
+                    <small class="form-text text-muted">Sẽ dùng để xác minh tài khoản</small>
+                </div>
+
+                <!-- Số Điện Thoại -->
+                <div class="form-group">
+                    <label for="phone">Số Điện Thoại</label>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        class="form-control" 
+                        placeholder="0xxxxxxxxx" 
+                        required
+                    >
+                    <small class="form-text text-muted">10-11 số điện thoại hợp lệ</small>
+                </div>
+
+                <!-- Tên Đăng Nhập -->
+                <div class="form-group">
+                    <label for="regUsername">Tên Đăng Nhập</label>
+                    <input 
+                        type="text" 
+                        id="regUsername" 
+                        class="form-control" 
+                        placeholder="Không dấu, không ký tự đặc biệt" 
+                        required
+                    >
+                    <small class="form-text text-muted">Không chứa dấu cách, không bắt đầu bằng số</small>
+                </div>
+
+                <!-- Mật Khẩu -->
+                <div class="form-group">
+                    <label for="regPassword">Mật Khẩu</label>
+                    <input 
+                        type="password" 
+                        id="regPassword" 
+                        class="form-control" 
+                        placeholder="Mật khẩu mạnh" 
+                        oninput="checkPasswordStrength()"
+                        required
+                    >
+                    <div class="password-strength mt-2">
+                        <div class="strength-bar">
+                            <div id="strengthFill" class="strength-fill"></div>
+                        </div>
+                        <small id="strengthText" class="form-text text-muted">Độ mạnh: Yếu</small>
+                    </div>
+                </div>
+
+                <!-- Xác Nhận Mật Khẩu -->
+                <div class="form-group">
+                    <label for="confirmPassword">Xác Nhận Mật Khẩu</label>
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        class="form-control" 
+                        placeholder="Nhập lại mật khẩu" 
+                        required
+                    >
+                    <small id="confirmText" class="form-text text-muted"></small>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Tạo Tài Khoản</button>
+            </form>
+
+            <div class="form-group text-center mt-4">
+                <p>Đã có tài khoản? 
+                    <a href="/templates/login.html" class="text-link font-bold">Đăng nhập</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/validation.js"></script>
+    <script src="/js/register.js"></script>
+</body>
+</html>

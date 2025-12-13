@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập - TetGame</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+    <button class="back-button" onclick="goBack();">←</button>
+
+    <div class="full-screen auth-container">
+        <div class="form-container">
+            <h2 class="text-center">Đăng Nhập</h2>
+            
+            <div id="alertContainer"></div>
+
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Tên Đăng Nhập</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        class="form-control" 
+                        placeholder="Nhập tên đăng nhập" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mật Khẩu</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        class="form-control" 
+                        placeholder="Nhập mật khẩu" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group text-right">
+                    <a href="/templates/forgot-password.html" class="text-link">Quên mật khẩu?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Đăng Nhập</button>
+            </form>
+
+            <div class="form-group text-center mt-4">
+                <p>Bạn chưa có tài khoản? 
+                    <a href="/templates/register.html" class="text-link font-bold">Tạo tài khoản</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/validation.js"></script>
+    <script src="/js/auth.js"></script>
+</body>
+</html>
