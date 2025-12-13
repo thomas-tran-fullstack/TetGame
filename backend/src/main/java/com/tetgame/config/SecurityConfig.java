@@ -31,9 +31,9 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login", "/register", "/api/auth/**", "/oauth2/**", "/oauth2/callback/**", "/actuator/**",
+                        .requestMatchers("/", "/login", "/register", "/templates/**", "/api/auth/**", "/oauth2/**", "/oauth2/callback/**", "/actuator/**",
                                         "/swagger-ui/**", "/v3/api-docs/**", "/images/**",
-                                        "/static/**", "/index.html", "/*.js", "/*.css", "/css/**", "/js/**", "/templates/**").permitAll()
+                                        "/static/**", "/index.html", "/*.js", "/*.css", "/css/**", "/js/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
